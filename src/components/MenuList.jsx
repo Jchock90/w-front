@@ -1,5 +1,4 @@
 // src/components/MenuList.jsx
-
 import React, { useEffect, useState } from 'react';
 import { useMenuApi } from '../api/menuApi';
 
@@ -24,7 +23,9 @@ const MenuList = () => {
       <h2>Menús</h2>
       <ul>
         {menus.map((menu) => (
-          <li key={menu._id}>{menu.name} - {menu.description} - {menu.price}</li>
+          <li key={menu._id}>
+            {menu.name} - {menu.description} - {menu.price} - {menu.categoria} - <img src={menu.imagen} alt={menu.name} width="50" />
+          </li>
         ))}
       </ul>
     </div>
