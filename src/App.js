@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import Navbar from './components/Navbar';
 import Login from './components/Login';
 import Register from './components/Register';
 import AddMenu from './components/AddMenu';
 import MenuList from './components/MenuList';
-import Navbar from './components/Navbar';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import './index.css';
 import './App.css';
