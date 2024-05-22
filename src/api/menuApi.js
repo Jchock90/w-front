@@ -1,4 +1,3 @@
-// src/api/menuApi.js
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 
@@ -25,5 +24,23 @@ export const useMenuApi = () => {
     return response.data;
   };
 
-  return { getMenus, addMenu };
+  const editMenu = async (id, menuData) => {
+    const response = await axios.put(`${API_URL}/edit/${id}`, menuData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  };
+
+  const deleteMenu = async (id) => {
+    const response = await axios.delete(`${API_URL}/delete/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  };
+
+  return { getMenus, addMenu, editMenu, deleteMenu };
 };

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useMenuApi } from '../api/menuApi';
 
-const AddMenu = () => {
-  const { addMenu } = useMenuApi();
+const AddMenu = ({ menuToEdit, onMenuUpdated }) => {
+  const { addMenu, editMenu } = useMenuApi();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
@@ -10,20 +10,35 @@ const AddMenu = () => {
   const [imagen, setImagen] = useState('');
   const [error, setError] = useState('');
 
+  useEffect(() => {
+    if (menuToEdit) {
+      setName(menuToEdit.name);
+      setDescription(menuToEdit.description);
+      setPrice(menuToEdit.price);
+      setCategoria(menuToEdit.categoria);
+      setImagen(menuToEdit.imagen);
+    }
+  }, [menuToEdit]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await addMenu({ name, description, price, categoria, imagen });
-      console.log('Menú agregado exitosamente');
+      if (menuToEdit) {
+        await editMenu(menuToEdit._id, { name, description, price, categoria, imagen });
+        onMenuUpdated();
+      } else {
+        await addMenu({ name, description, price, categoria, imagen });
+      }
+      console.log('Menú guardado exitosamente');
     } catch (err) {
-      setError('Error al agregar el menú');
+      setError('Error al guardar el menú');
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-gray-900 text-center">Agregar Menú</h2>
+        <h2 className="text-2xl font-bold mb-6 text-gray-900 text-center">{menuToEdit ? 'Editar Menú' : 'Agregar Menú'}</h2>
         {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -79,7 +94,7 @@ const AddMenu = () => {
             type="submit"
             className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
           >
-            Agregar Menú
+            {menuToEdit ? 'Guardar Cambios' : 'Agregar Menú'}
           </button>
         </form>
       </div>
