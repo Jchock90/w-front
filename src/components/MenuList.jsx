@@ -1,3 +1,5 @@
+// src/components/MenuList.jsx
+
 import React, { useEffect, useState } from 'react';
 import { useMenuApi } from '../api/menuApi';
 import AddMenu from './AddMenu';
