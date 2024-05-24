@@ -1,3 +1,5 @@
+// src/components/Login.jsx
+
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
@@ -50,9 +52,9 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+            className="w-full bg-black text-white p-2 rounded "
           >
-            Login
+            Ok
           </button>
         </form>
       </div>

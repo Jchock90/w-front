@@ -1,8 +1,7 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'OpenSerif-Book';
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -10,6 +9,28 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+@font-face {
+  font-family: 'Rockers Garage';
+  src: url('../public/fonts/rockers_garage.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OpenSerif-Book';
+  src: url('../public/fonts/openserif_book.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.fuente1 {
+  font-family: 'Rockers Garage';
+}
+
+.fuente2 {
+  font-family: 'Rockers Garage';
 }
 
 @tailwind base;

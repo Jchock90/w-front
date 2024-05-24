@@ -40,7 +40,7 @@ const AddMenu = ({ menuToEdit, onMenuUpdated }) => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-green-400 to-blue-500">
       <div className="bg-white p-10 rounded-lg shadow-md w-full max-w-lg">
-        <h2 className="text-3xl font-bold mb-6 text-gray-900 text-center">{menuToEdit ? 'Editar Menú' : 'Agregar Menú'}</h2>
+        <h2 className="text-3xl font-bold mb-6 text-gray-900 text-center fuente1">{menuToEdit ? 'Editar Menú' : 'Agregar Menú'}</h2>
         {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -73,7 +73,7 @@ const AddMenu = ({ menuToEdit, onMenuUpdated }) => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-lg font-semibold">Categoría:</label>
+            <label className="block text-gray-700 text-lg font-semibold rounde">Categoría:</label>
             <input
               type="text"
               value={categoria}
@@ -93,9 +93,9 @@ const AddMenu = ({ menuToEdit, onMenuUpdated }) => {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition duration-300"
+            className="w-full bg-black text-white p-3 rounded-lg hover:bg-gray transition duration-300"
           >
-            {menuToEdit ? 'Guardar Cambios' : 'Agregar Menú'}
+            {menuToEdit ? 'Guardar Cambios' : 'Agregar'}
           </button>
         </form>
       </div>
