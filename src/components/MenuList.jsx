@@ -39,7 +39,7 @@ const MenuList = () => {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold text-center my-6 mb-6 fuente1">Lista de Menús</h1>
+      <h1 className="text-4xl border w-[300px] bg-black font-bold text-center text-white my-6 mb-6 fuente1 mx-auto">Lista de Menús</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {menus.map((menu) => (
           <div key={menu._id} className="bg-white p-4 rounded shadow-md">

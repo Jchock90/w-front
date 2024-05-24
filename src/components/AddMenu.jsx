@@ -38,7 +38,7 @@ const AddMenu = ({ menuToEdit, onMenuUpdated }) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-green-400 to-blue-500">
+    <div className="min-h-screen flex items-center justify-center">
       <div className="bg-white p-10 rounded-lg shadow-md w-full max-w-lg">
         <h2 className="text-3xl font-bold mb-6 text-gray-900 text-center fuente1">{menuToEdit ? 'Editar Menú' : 'Agregar Menú'}</h2>
         {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
