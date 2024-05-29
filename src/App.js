@@ -7,6 +7,8 @@ import Login from './components/Login';
 import Register from './components/Register';
 import AddMenu from './components/AddMenu';
 import MenuList from './components/MenuList';
+import ConsumersMenuList from './components/ConsumerMenuList';
+
 import { AuthProvider, useAuth } from './context/AuthContext';
 import './index.css';
 import './App.css';
@@ -26,6 +28,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/add-menu" element={<PrivateRoute element={<AddMenu />} />} />
           <Route path="/menus" element={<PrivateRoute element={<MenuList />} />} />
+          <Route path="/consumers" element={<ConsumersMenuList />} />
+
         </Routes>
       </Router>
     </AuthProvider>
