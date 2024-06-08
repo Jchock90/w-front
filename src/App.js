@@ -1,4 +1,4 @@
-// Apps.js
+// App.js
 
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
@@ -23,14 +23,16 @@ function App() {
     <AuthProvider>
       <Router>
         <Navbar />
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/add-menu" element={<PrivateRoute element={<AddMenu />} />} />
-          <Route path="/menus" element={<PrivateRoute element={<MenuList />} />} />
-          <Route path="/consumers" element={<ConsumersMenuList />} />
-
-        </Routes>
+        <div className="container mx-auto p-4">
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/add-menu" element={<PrivateRoute element={<AddMenu />} />} />
+            <Route path="/menus" element={<PrivateRoute element={<MenuList />} />} />
+            <Route path="/consumers" element={<ConsumersMenuList />} />
+            <Route path="/" element={<Navigate to="/consumers" />} />
+          </Routes>
+        </div>
       </Router>
     </AuthProvider>
   );
