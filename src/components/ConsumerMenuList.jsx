@@ -1,8 +1,9 @@
-// scr/components/ConsumersMenuList.jsx
-
+// src/components/ConsumerMenuList.jsx
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
 const ConsumersMenuList = () => {
   const [menus, setMenus] = useState([]);
@@ -47,10 +48,36 @@ const ConsumersMenuList = () => {
     return cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
   };
 
+  // Define las opciones de respuesta para el carousel
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3,
+      infinite: true // Hacer el carousel infinito en el escritorio
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+      infinite: true // Hacer el carousel infinito en la tableta
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+      infinite: true // Hacer el carousel infinito en el móvil
+    },
+  };
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       <h1 className="text-4xl border w-[300px] bg-black font-bold text-center text-white my-6 mb-6 fuente1 mx-auto">Lista de Menús</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <Carousel
+        responsive={responsive}
+        swipeable={true}
+        draggable={true}
+        showDots={true}
+        infinite={true}
+        itemClass="px-4" // Hacer el carousel infinito globalmente
+      >
         {menus.map((menu) => (
           <div key={menu._id} className="bg-white p-4 rounded shadow-md">
             <h2 className="text-xl text-center font-bold mb-2 fuente1">{menu.name}</h2>
@@ -61,7 +88,7 @@ const ConsumersMenuList = () => {
             <button onClick={() => addToCart(menu)} className="bg-black text-white px-4 py-2 rounded mt-2 w-full">Agregar al carrito</button>
           </div>
         ))}
-      </div>
+      </Carousel>
       <div className="mt-8">
         <h2 className="text-2xl text-white text-center fuente1 font-bold mb-4">Carrito de compras</h2>
         {cart.length === 0 ? (
@@ -90,3 +117,4 @@ const ConsumersMenuList = () => {
 };
 
 export default ConsumersMenuList;
+ 
