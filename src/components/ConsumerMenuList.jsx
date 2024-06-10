@@ -25,28 +25,40 @@ const ConsumersMenuList = () => {
     };
 
     fetchMenus();
+
+    // Cargar el carrito desde el almacenamiento local al iniciar
+    const storedCart = localStorage.getItem('cart');
+    if (storedCart) {
+      setCart(JSON.parse(storedCart));
+    }
   }, []);
 
   const addToCart = (menu) => {
     const existingItem = cart.find(item => item._id === menu._id);
+    let updatedCart;
     if (existingItem) {
-      setCart(cart.map(item =>
+      updatedCart = cart.map(item =>
         item._id === menu._id ? { ...item, quantity: item.quantity + 1 } : item
-      ));
+      );
     } else {
-      setCart([...cart, { ...menu, cartItemId: new Date().getTime(), quantity: 1 }]);
+      updatedCart = [...cart, { ...menu, cartItemId: new Date().getTime(), quantity: 1 }];
     }
+    setCart(updatedCart);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
   };
 
   const removeFromCart = (cartItemId) => {
     const itemToRemove = cart.find(item => item.cartItemId === cartItemId);
+    let updatedCart;
     if (itemToRemove.quantity > 1) {
-      setCart(cart.map(item =>
+      updatedCart = cart.map(item =>
         item.cartItemId === cartItemId ? { ...item, quantity: item.quantity - 1 } : item
-      ));
+      );
     } else {
-      setCart(cart.filter((item) => item.cartItemId !== cartItemId));
+      updatedCart = cart.filter((item) => item.cartItemId !== cartItemId);
     }
+    setCart(updatedCart);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
   };
 
   const getTotalPrice = () => {
@@ -99,7 +111,7 @@ const ConsumersMenuList = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
-      <h1 className="text-4xl border w-[200px] bg-black font-bold text-center text-white my-6 mb-6 fuente1 mx-auto">Menús</h1>
+      <h1 className="text-4xl border w-[300px] bg-black font-bold text-center text-white my-6 mb-6 fuente1 mx-auto">Menús</h1>
 
       {/* Barra de búsqueda */}
       <div className="mb-4 flex justify-center">
@@ -108,7 +120,7 @@ const ConsumersMenuList = () => {
           value={searchTerm}
           onChange={handleSearchChange}
           placeholder="Buscar menús..."
-          className="px-4 py-2 sm:w-[400px] md:w-[400px] lg:w-[600px] rounded focus:outline-none"
+          className="px-4 py-2 w-full sm:w-1/2 rounded focus:outline-none"
         />
       </div>
 
@@ -177,5 +189,5 @@ const ConsumersMenuList = () => {
     </div>
   );
 };
- 
+
 export default ConsumersMenuList;
