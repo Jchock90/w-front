@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import { Popover } from '@headlessui/react';
 
 const ConsumersMenuList = () => {
   const [menus, setMenus] = useState([]);
@@ -26,7 +27,6 @@ const ConsumersMenuList = () => {
 
     fetchMenus();
 
-    // Cargar el carrito desde el almacenamiento local al iniciar
     const storedCart = localStorage.getItem('cart');
     if (storedCart) {
       setCart(JSON.parse(storedCart));
@@ -125,22 +125,29 @@ const ConsumersMenuList = () => {
       </div>
 
       {/* Categorías */}
-      <div className="m-4 sm:m-8 flex justify-center flex-wrap">
-        {categories.map(category => (
-          <span
-            key={category}
-            className={`text-white m-2 cursor-pointer ${selectedCategories.has(category) ? 'font-bold' : ''}`}
-            onClick={() => handleCategoryClick(category)}
-          >
-            {category}
-          </span>
-        ))}
-        <span
-          className={`text-white m-2 cursor-pointer ${selectedCategories.size === 0 ? 'font-bold' : ''}`}
-          onClick={handleShowAllMenus}
-        >
-          Mostrar todos
-        </span>
+      <div className="mb-4 flex justify-center">
+        <Popover className="relative">
+          <Popover.Button className="text-white bg-black px-4 py-2 rounded">Categorías</Popover.Button>
+          <Popover.Panel className="absolute z-10 bg-white border border-gray-300 rounded shadow-lg mt-2 w-48">
+            <div className="p-4 flex flex-col space-y-2">
+              {categories.map(category => (
+                <button
+                  key={category}
+                  className={`text-left px-4 py-2 rounded ${selectedCategories.has(category) ? 'bg-gray-300' : ''}`}
+                  onClick={() => handleCategoryClick(category)}
+                >
+                  {category}
+                </button>
+              ))}
+              <button
+                className={`text-left px-4 py-2 rounded ${selectedCategories.size === 0 ? 'bg-gray-300' : ''}`}
+                onClick={handleShowAllMenus}
+              >
+                Mostrar todos
+              </button>
+            </div>
+          </Popover.Panel>
+        </Popover>
       </div>
 
       <Carousel
