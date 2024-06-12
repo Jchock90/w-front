@@ -5,6 +5,7 @@ import axios from 'axios';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { Popover } from '@headlessui/react';
+import { ChevronDownIcon } from '@heroicons/react/24/solid';
 
 const ConsumersMenuList = () => {
   const [menus, setMenus] = useState([]);
@@ -120,14 +121,17 @@ const ConsumersMenuList = () => {
           value={searchTerm}
           onChange={handleSearchChange}
           placeholder="Buscar menús..."
-          className="px-4 py-2 w-full sm:w-1/2 rounded focus:outline-none"
+          className="px-4 py-2 w-full sm:w-1/2 rounded focus:outline-none focus:ring-0"
         />
       </div>
 
       {/* Categorías */}
       <div className="mb-4 flex justify-center">
         <Popover className="relative">
-          <Popover.Button className="text-white bg-black px-4 py-2 rounded">Categorías</Popover.Button>
+          <Popover.Button className="flex flex-col items-center text-white bg-black px-4 py-2 rounded">
+            Categorías
+            <ChevronDownIcon className="h-5 w-5 mt-1" />
+          </Popover.Button>
           <Popover.Panel className="absolute z-10 bg-white border border-gray-300 rounded shadow-lg mt-2 w-48">
             <div className="p-4 flex flex-col space-y-2">
               {categories.map(category => (
@@ -161,10 +165,10 @@ const ConsumersMenuList = () => {
         {filteredMenus.map((menu) => (
           <div key={menu._id} className="bg-white p-4 rounded shadow-md">
             <h2 className="text-xl text-center font-bold mb-2 fuente1">{menu.name}</h2>
-            <p className="mb-2">{menu.description}</p>
-            <p className="mb-2 text-center fuente1 text-xl">${menu.price}</p>
-            <p className="mb-2 text-white bg-black rounded text-center">{menu.categoria}</p>
             <img src={menu.imagen} alt={menu.name} className="w-full h-32 object-cover rounded mb-2" />
+            <p className="mb-2 text-center fuente1 text-xl">${menu.price}</p>        
+            <p className="mb-2">{menu.description}</p>
+            <p className="mb-2 text-white bg-black rounded text-center">{menu.categoria}</p>
             <button onClick={() => addToCart(menu)} className="bg-black text-white px-4 py-2 rounded mt-2 w-full">Agregar al carrito</button>
           </div>
         ))}
