@@ -6,6 +6,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { Popover } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/24/solid';
+import { FaTrash } from 'react-icons/fa'; // Importa el icono de la biblioteca react-icons
 
 const ConsumersMenuList = () => {
   const [menus, setMenus] = useState([]);
@@ -111,8 +112,10 @@ const ConsumersMenuList = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
-      <h1 className="text-4xl border w-[300px] bg-black font-bold text-center text-white my-6 mb-6 fuente1 mx-auto">Menús</h1>
+    <div className="max-w-6xl mx-auto px-4 py-4">
+      <h1 className="text-4xl w-[300px] bg-black font-bold text-center text-white mb-2 fuente1 mx-auto">
+        Menú
+      </h1>
 
       {/* Barra de búsqueda */}
       <div className="mb-4 flex justify-center">
@@ -120,34 +123,34 @@ const ConsumersMenuList = () => {
           type="text"
           value={searchTerm}
           onChange={handleSearchChange}
-          placeholder="Buscar menús..."
-          className="px-4 py-2 w-full sm:w-1/2 rounded focus:outline-none focus:ring-0"
+          placeholder="Buscar menú..."
+          className="px-4 py-2 w-[300px] rounded focus:outline-none focus:ring-0"
         />
       </div>
 
       {/* Categorías */}
       <div className="mb-4 flex justify-center">
         <Popover className="relative">
-          <Popover.Button className="flex flex-col items-center text-white bg-black px-4 py-2 rounded">
+          <Popover.Button className="flex flex-col focus:outline-none items-center text-xl text-white bg-black px-4 py-2 rounded hover:border fuente1">
             Categorías
             <ChevronDownIcon className="h-5 w-5 mt-1" />
           </Popover.Button>
-          <Popover.Panel className="absolute z-10 bg-white border border-gray-300 rounded shadow-lg mt-2 w-48">
+          <Popover.Panel className="absolute z-10 text-white bg-black border border-white rounded shadow-lg mt-2 w-48 left-1/2 transform -translate-x-1/2">
             <div className="p-4 flex flex-col space-y-2">
               {categories.map(category => (
                 <button
                   key={category}
-                  className={`text-left px-4 py-2 rounded ${selectedCategories.has(category) ? 'bg-gray-300' : ''}`}
+                  className={`text-center px-4 py-2 rounded ${selectedCategories.has(category) ? 'border' : ''}`}
                   onClick={() => handleCategoryClick(category)}
                 >
                   {category}
                 </button>
               ))}
               <button
-                className={`text-left px-4 py-2 rounded ${selectedCategories.size === 0 ? 'bg-gray-300' : ''}`}
+                className={`text-center px-4 py-2 rounded ${selectedCategories.size === 0 ? 'border' : ''}`}
                 onClick={handleShowAllMenus}
               >
-                Mostrar todos
+                Mostrar todas
               </button>
             </div>
           </Popover.Panel>
@@ -158,26 +161,27 @@ const ConsumersMenuList = () => {
         responsive={responsive}
         swipeable={true}
         draggable={true}
-        showDots={true}
+        showDots={false}
         infinite={true}
         itemClass="px-4"
+        itemClass="flex justify-center"
       >
         {filteredMenus.map((menu) => (
-          <div key={menu._id} className="bg-white p-4 rounded shadow-md">
+          <div key={menu._id} className="bg-white p-4 w-[300px] h-[500px] rounded shadow-md">
             <h2 className="text-xl text-center font-bold mb-2 fuente1">{menu.name}</h2>
             <img src={menu.imagen} alt={menu.name} className="w-full h-32 object-cover rounded mb-2" />
             <p className="mb-2 text-center fuente1 text-xl">${menu.price}</p>        
-            <p className="mb-2">{menu.description}</p>
+            <p className="mb-2 h-[170px]">{menu.description}</p>
             <p className="mb-2 text-white bg-black rounded text-center">{menu.categoria}</p>
-            <button onClick={() => addToCart(menu)} className="bg-black text-white px-4 py-2 rounded mt-2 w-full">Agregar al carrito</button>
+            <button onClick={() => addToCart(menu)} className="bg-black text-white px-4 py-2 rounded mt-2 w-full">Agregar a pedidos</button>
           </div>
         ))}
       </Carousel>
 
       <div className="mt-8">
-        <h2 className="text-2xl text-white text-center fuente1 font-bold mb-4">Carrito de compras</h2>
+        <h2 className="text-4xl text-white text-center fuente1 font-bold mb-4">Pedidos</h2>
         {cart.length === 0 ? (
-          <p className="text-gray-600 text-center">El carrito está vacío.</p>
+          <p className="text-gray-600 text-center">Tu plato está vacío.</p>
         ) : (
           <div>
             <ul className="divide-y divide-gray-600">
@@ -187,7 +191,9 @@ const ConsumersMenuList = () => {
                     <p className="font-semibold text-white">{item.name} (x{item.quantity})</p>
                     <p className="text-gray-600">${(item.price * item.quantity).toFixed(2)}</p>
                   </div>
-                  <button onClick={() => removeFromCart(item.cartItemId)} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">Eliminar</button>
+                  <button onClick={() => removeFromCart(item.cartItemId)} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded flex items-center justify-center">
+                    <FaTrash /> {/* Usa el icono aquí */}
+                  </button>
                 </li>
               ))}
             </ul>
