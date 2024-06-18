@@ -6,7 +6,8 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { Popover } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/24/solid';
-import { FaTrash } from 'react-icons/fa'; // Importa el icono de la biblioteca react-icons
+import { FaTrash } from 'react-icons/fa';
+import { useOrderApi } from '../api/orderApi'; // Importa useOrderApi
 
 const ConsumersMenuList = () => {
   const [menus, setMenus] = useState([]);
@@ -14,6 +15,7 @@ const ConsumersMenuList = () => {
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState(new Set());
   const [searchTerm, setSearchTerm] = useState('');
+  const { addOrder } = useOrderApi(); // Añade addOrder desde useOrderApi
 
   useEffect(() => {
     const fetchMenus = async () => {
@@ -93,6 +95,22 @@ const ConsumersMenuList = () => {
     return matchesCategory && matchesSearchTerm;
   });
 
+  const handlePlaceOrder = async () => {
+    const orderData = {
+      items: cart.map(item => ({ name: item.name, price: item.price, quantity: item.quantity })),
+      total: getTotalPrice()
+    };
+
+    try {
+      await addOrder(orderData);
+      setCart([]);
+      localStorage.removeItem('cart');
+      console.log('Pedido enviado exitosamente');
+    } catch (error) {
+      console.error('Error al enviar el pedido:', error);
+    }
+  };
+
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -163,8 +181,7 @@ const ConsumersMenuList = () => {
         draggable={true}
         showDots={false}
         infinite={true}
-        itemClass="px-4"
-        itemClass="flex justify-center"
+        itemClass="px-4 flex justify-center"
       >
         {filteredMenus.map((menu) => (
           <div key={menu._id} className="bg-white p-4 w-[300px] h-[500px] rounded shadow-md">
@@ -199,6 +216,14 @@ const ConsumersMenuList = () => {
             </ul>
             <div className="mt-4 flex justify-end">
               <p className="text-xl text-white font-semibold">Total: ${getTotalPrice()}</p>
+            </div>
+            <div className="mt-4 flex justify-center">
+              <button
+                className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800"
+                onClick={handlePlaceOrder}
+              >
+                Realizar Pedido
+              </button>
             </div>
           </div>
         )}
