@@ -1,7 +1,8 @@
 body {
   margin: 0;
   font-family: 'OpenSerif-Book';
-  background-image: url('../public/img/food.jpg'); /* Cambia 'background.jpg' por el nombre de tu imagen */
+  /* background-image: url('../public/img/food.jpg'); */
+  background-color: black;
   background-size: cover; /* Cubrir todo el viewport */
   background-repeat: no-repeat;
   background-position: center; /* Centrar la imagen */
