@@ -26,5 +26,14 @@ export const useOrderApi = () => {
     return response.data;
   };
 
-  return { getOrders, addOrder };
+  const deleteOrder = async (id) => {
+    const response = await axios.delete(`${API_URL}/delete/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  };
+
+  return { getOrders, addOrder, deleteOrder };
 };

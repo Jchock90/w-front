@@ -8,6 +8,8 @@ import Register from './components/Register';
 import AddMenu from './components/AddMenu';
 import MenuList from './components/MenuList';
 import ConsumersMenuList from './components/ConsumerMenuList';
+import OrderList from './components/OrderList';
+
 
 import { AuthProvider, useAuth } from './context/AuthContext';
 import './index.css';
@@ -29,6 +31,7 @@ const AppContent = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/add-menu" element={<PrivateRoute element={<AddMenu />} />} />
+        <Route path="/orders" element={<PrivateRoute element={<OrderList />} />} />
         <Route path="/menus" element={<PrivateRoute element={<MenuList />} />} />
         <Route path="/consumers" element={<ConsumersMenuList />} />
       </Routes>

@@ -114,12 +114,12 @@ const ConsumersMenuList = () => {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 3,
+      items: 1,
       infinite: true
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 2,
+      items: 1,
       infinite: true
     },
     mobile: {
@@ -188,9 +188,9 @@ const ConsumersMenuList = () => {
             <h2 className="text-xl text-center font-bold mb-2 fuente1">{menu.name}</h2>
             <img src={menu.imagen} alt={menu.name} className="w-full h-32 object-cover rounded mb-2" />
             <p className="mb-2 text-center fuente1 text-xl">${menu.price}</p>        
-            <p className="mb-2 h-[170px]">{menu.description}</p>
+            <p className="mb-2 h-[180px]">{menu.description}</p>
             <p className="mb-2 text-white bg-black rounded text-center">{menu.categoria}</p>
-            <button onClick={() => addToCart(menu)} className="bg-black text-white px-4 py-2 rounded mt-2 w-full">Agregar a pedidos</button>
+            <button onClick={() => addToCart(menu)} className=" bg-black text-white px-4 py-2 rounded mt-2 w-full">Agregar a pedidos</button>
           </div>
         ))}
       </Carousel>
@@ -219,7 +219,7 @@ const ConsumersMenuList = () => {
             </div>
             <div className="mt-4 flex justify-center">
               <button
-                className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800"
+                className="text-white px-4 py-2 rounded bg-red-500 hover:bg-red-600 "
                 onClick={handlePlaceOrder}
               >
                 Realizar Pedido

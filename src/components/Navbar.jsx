@@ -67,6 +67,11 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/orders" className="text-white text-center hover:text-gray-400">
+                  Pedidos
+                </Link>
+              </li>
+              <li>
                 <button
                   onClick={logout}
                   className="text-white bg-red-500 px-3 py-2 rounded hover:bg-red-600"
