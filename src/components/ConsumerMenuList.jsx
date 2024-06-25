@@ -20,7 +20,7 @@ const ConsumersMenuList = () => {
   useEffect(() => {
     const fetchMenus = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/menus');
+        const response = await axios.get('http://192.168.1.111:5000/api/menus');
         setMenus(response.data);
         const uniqueCategories = new Set(response.data.map(menu => menu.categoria));
         setCategories(Array.from(uniqueCategories));

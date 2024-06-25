@@ -13,12 +13,12 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', {
+      const response = await axios.post('http://192.168.1.111:5000/api/auth/login', {
         username: email,
         password
       });
-      const { data } = response;
-      login(data.token);
+      const { token } = response.data;
+      login(token);
     } catch (error) {
       setError(error.response.data.message);
     }
@@ -52,7 +52,7 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-black text-white p-2 rounded "
+            className="w-full bg-black text-white p-2 rounded"
           >
             Ok
           </button>

@@ -1,9 +1,8 @@
 // src/api/menuApi.js
-
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 
-const API_URL = 'http://localhost:5000/api/menus';
+const API_URL = 'http://192.168.1.111:5000/api/menus';
 
 export const useMenuApi = () => {
   const { token } = useAuth();
