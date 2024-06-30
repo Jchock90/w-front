@@ -67,6 +67,7 @@ const OrderList = () => {
                   </button>
                 </div>
               </div>
+              <p className="text-gray-500">Origen: {order.source}</p> {/* Mostrar el origen */}
               <ul className="divide-y divide-gray-200">
                 {order.items.map((item, index) => (
                   <li key={index} className="py-2 flex justify-between">

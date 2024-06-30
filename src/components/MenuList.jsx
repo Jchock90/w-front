@@ -1,4 +1,5 @@
 // src/components/MenuList.jsx
+
 import React, { useEffect, useState } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
@@ -70,16 +71,10 @@ const MenuList = () => {
     return matchesCategory && matchesSearchTerm;
   });
 
-  const categorizedMenus = filteredMenus.reduce((acc, menu) => {
-    acc[menu.categoria] = acc[menu.categoria] || [];
-    acc[menu.categoria].push(menu);
-    return acc;
-  }, {});
-
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 1,
+      items: 3,
       infinite: true
     },
     tablet: {
@@ -138,50 +133,44 @@ const MenuList = () => {
         </Popover>
       </div>
 
-      {Object.keys(categorizedMenus).map((categoria) => (
-        <div key={categoria}>
-          <h2 className="text-3xl font-bold text-center text-white my-6 fuente1">{categoria}</h2>
-          <Carousel
-            responsive={responsive}
-            swipeable={true}
-            draggable={true}
-            showDots={false}
-            infinite={true}
-            itemClass="px-4 flex justify-center"
-            
-          >
-            {categorizedMenus[categoria].map((menu) => (
-              <div key={menu._id} className="bg-white p-4 w-[300px] h-[500px] rounded shadow-md">
-                <h2 className="text-xl text-center text-black font-bold mb-2 fuente1">{menu.name}</h2>
-                {menu.imagen && (
-                  <img
-                    src={menu.imagen}
-                    alt={menu.name}
-                    className="w-full h-32 object-cover rounded mb-2"
-                  />
-                )}
-                <p className="mb-2 text-center text-black fuente1 text-xl">${menu.price}</p>
-                <p className="mb-2 text-black h-[180px]">{menu.description}</p>
-                <p className="mb-2 text-white bg-black rounded text-center">{menu.categoria}</p>
-                <div className="flex justify-between mt-auto">
-                  <button
-                    className="bg-black text-white px-3 py-1 rounded text-sm"
-                    onClick={() => handleEdit(menu)}
-                  >
-                    Editar
-                  </button>
-                  <button
-                    className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm"
-                    onClick={() => handleDelete(menu._id)}
-                  >
-                    Eliminar
-                  </button>
-                </div>
-              </div>
-            ))}
-          </Carousel>
-        </div>
-      ))}
+      <Carousel
+        responsive={responsive}
+        swipeable={false}
+        draggable={true}
+        showDots={false}
+        infinite={true}
+        itemClass="px-4 flex justify-center"
+      >
+        {filteredMenus.map((menu) => (
+          <div key={menu._id} className="bg-white p-4 w-[300px] h-[500px] rounded shadow-md">
+            <h2 className="text-xl text-center text-black font-bold mb-2 fuente1">{menu.name}</h2>
+            {menu.imagen && (
+              <img
+                src={menu.imagen}
+                alt={menu.name}
+                className="w-full h-32 object-cover rounded mb-2"
+              />
+            )}
+            <p className="mb-2 text-center text-black fuente1 text-xl">${menu.price}</p>
+            <p className="mb-2 text-black h-[180px]">{menu.description}</p>
+            <p className="mb-2 text-white bg-black rounded text-center">{menu.categoria}</p>
+            <div className="flex justify-between mt-auto">
+              <button
+                className="bg-black text-white px-3 py-1 rounded text-sm"
+                onClick={() => handleEdit(menu)}
+              >
+                Editar
+              </button>
+              <button
+                className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm"
+                onClick={() => handleDelete(menu._id)}
+              >
+                Eliminar
+              </button>
+            </div>
+          </div>
+        ))}
+      </Carousel>
       {menuToEdit && <AddMenu menuToEdit={menuToEdit} onMenuUpdated={handleMenuUpdated} />}
     </div>
   );
