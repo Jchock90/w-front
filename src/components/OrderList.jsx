@@ -14,7 +14,7 @@ const OrderList = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get('http://192.168.1.111:5000/api/orders');
+        const response = await axios.get('http://localhost:5000/api/orders');
         setOrders(response.data);
       } catch (err) {
         setError('Error fetching orders');

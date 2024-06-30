@@ -11,7 +11,7 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://192.168.1.111:5000/api/auth/register', {
+      const response = await axios.post('http://localhost:5000/api/auth/register', {
         username,
         password
       });
@@ -23,7 +23,7 @@ function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-black fuente2">
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
         <h2 className="text-2xl text-center font-bold mb-6 text-gray-900">Registro</h2>
         <form onSubmit={handleSubmit}>
