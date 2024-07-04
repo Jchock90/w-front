@@ -13,7 +13,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gray-800 p-4 shadow-lg fuente1">
+    <nav className="bg-black p-4 shadow-lg fuente1">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="text-white text-2xl md:text-3xl lg:text-4xl font-bold fuente1">
           w4it3rdestroy3r
@@ -53,7 +53,7 @@ const Navbar = () => {
             )}
           </button>
         </div>
-        <ul className={`md:flex md:space-x-4 items-center text-center ${mobileMenuOpen ? 'block' : 'hidden'} ${isAuthenticated ? 'mt-4 md:mt-0' : ''}`}>
+        <ul className={`md:flex md:space-x-4 items-center text-xl text-center ${mobileMenuOpen ? 'block' : 'hidden'} ${isAuthenticated ? 'mt-4 md:mt-0' : ''}`}>
           {isAuthenticated ? (
             <>
               <li>
