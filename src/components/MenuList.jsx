@@ -137,10 +137,10 @@ const MenuList = () => {
         <Slider {...settings} className="mx-4">
           {filteredMenus.map((menu) => (
             <div key={menu._id} className="px-1">
-              <div className="bg-white p-4 rounded-lg shadow-lg max-w-xs mx-auto">
+              <div className="bg-white p-4 rounded-lg shadow-lg w-[300px] h-[400px] mx-auto">
                 <h2 className="text-xl text-center font-bold mb-2 fuente1">{menu.name}</h2>
                 {menu.imagen && <img src={menu.imagen} alt={menu.name} className="w-full h-24 object-cover rounded-lg mb-2" />}
-                <p className="text-black mb-2 text-sm">{menu.description}</p>
+                <div className="text-black mb-2 text-sm max-h-[100px] overflow-y-auto">{menu.description}</div>
                 <p className="text-center fuente1 text-lg font-semibold mb-2">${menu.price}</p>
                 <p className="text-center text-white bg-black rounded py-1 px-3 mb-2 fuente2">{menu.categoria}</p>
                 <div className="flex justify-between">
@@ -181,4 +181,3 @@ const MenuList = () => {
 };
 
 export default MenuList;
-
