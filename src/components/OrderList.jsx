@@ -14,26 +14,21 @@ const OrderList = () => {
   const { deleteOrder } = useOrderApi();
   const printRefs = useRef([]);
 
-  useEffect(() => {
-    const fetchOrders = async () => {
-      try {
-        const response = await axios.get('http://localhost:5000/api/orders');
-        setOrders(response.data);
-      } catch (err) {
-        setError('Error fetching orders');
-        console.error('Error fetching orders:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchOrders = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/orders');
+      setOrders(response.data);
+    } catch (err) {
+      setError('Error fetching orders');
+      console.error('Error fetching orders:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchOrders();
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      window.location.reload();
-    }, 30000);
+    const interval = setInterval(fetchOrders, 5000); // Polling cada 5 segundos
 
     return () => clearInterval(interval); // Limpiar el intervalo al desmontar el componente
   }, []);
@@ -58,6 +53,10 @@ const OrderList = () => {
     window.location.reload(); // Recargar para volver a la vista original
   };
 
+  const formatSource = (source) => {
+    return source.replace(/consumers(\d+)/, 'Mesa $1');
+  };
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -67,7 +66,7 @@ const OrderList = () => {
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-4 text-white m-10">
+    <div className="max-w-6xl mx-auto px-4 py-4 text-white">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="flex flex-col items-center">
           <h1 className="text-4xl font-bold text-center mt-4 mb-4 fuente1">Pedidos</h1>
@@ -78,9 +77,8 @@ const OrderList = () => {
               {orders.map((order, index) => (
                 <li key={order._id} className="py-4 flex flex-col">
                   <div className="flex justify-between items-center mb-2">
-                    <h2 className="text-xl font-bold">N° de pedido: {order._id}</h2>
+                    <h2 className="text-xl font-bold">N° de pedido: {order.orderNumber}</h2>
                     <div className="flex items-center space-x-4">
-                      <p className="text-white mr-4">Total: ${order.total}</p>
                       <button
                         onClick={() => handlePrintOrder(index)}
                         className="bg-blue-500 hover:bg-blue-700 text-white rounded-full p-2"
@@ -95,8 +93,8 @@ const OrderList = () => {
                       </button>
                     </div>
                   </div>
-                  <p className="text-gray-500">Origen: {order.source}</p>
-                  <ul className="divide-y divide-gray-200">
+                  <p className="text-gray-500 mb-2">Origen: {formatSource(order.source)}</p>
+                  <ul className="divide-y divide-gray-200 mb-2">
                     {order.items.map((item, index) => (
                       <li key={index} className="py-2 flex justify-between">
                         <p>{item.name} (x{item.quantity})</p>
@@ -104,6 +102,9 @@ const OrderList = () => {
                       </li>
                     ))}
                   </ul>
+                  <p className="text-xl font-bold text-right mt-4">
+                    Total: <span className="text-green-500">${order.total.toFixed(2)}</span>
+                  </p>
                   <PrintOrder ref={el => (printRefs.current[index] = el)} order={order} />
                 </li>
               ))}

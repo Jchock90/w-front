@@ -148,7 +148,7 @@ const ConsumersMenuList8 = () => {
 
       <div className="mb-4 flex justify-center">
         <Popover className="relative">
-          <Popover.Button className="flex flex-col focus:outline-none items-center text-xl text-white bg-black px-4 py-2 rounded hover:border fuente1">
+          <Popover.Button className="flex flex-col focus:outline-none items-center text-xl text-white bg-black px-4 py-2 rounded  fuente1">
             Categorías
             <ChevronDownIcon className="h-5 w-5 mt-1" />
           </Popover.Button>

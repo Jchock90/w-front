@@ -38,62 +38,62 @@ const AddMenu = ({ menuToEdit, onMenuUpdated }) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="bg-white p-10 rounded-lg shadow-md w-full max-w-lg">
-        <h2 className="text-3xl font-bold mb-6 text-gray-900 text-center fuente1">{menuToEdit ? 'Editar Menú' : 'Agregar Menú'}</h2>
+    <div className="min-h-screen flex items-top justify-center">
+      <div className="p-6 rounded-lg shadow-md w-full max-w-md">
+        <h2 className="text-3xl font-bold mb-4 text-white text-center fuente1">{menuToEdit ? 'Editar Menú' : 'Agregar Menú'}</h2>
         {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
         <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-lg font-semibold">Nombre:</label>
+          <div className="mb-3">
+            <label className="block text-white text-lg font-semibold">Nombre:</label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full p-3 border border-gray-300 rounded-lg mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-2 bg-black border border-white rounded-lg mt-1 text-white focus:outline-none focus:ring-0"
               required
             />
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-lg font-semibold">Descripción:</label>
+          <div className="mb-3">
+            <label className="block text-white text-lg font-semibold">Descripción:</label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full p-3 border border-gray-300 rounded-lg mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-2 bg-black border border-white rounded-lg mt-1 text-white focus:outline-none focus:ring-0"
               required
             />
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-lg font-semibold">Precio:</label>
+          <div className="mb-3">
+            <label className="block text-white text-lg font-semibold">Precio:</label>
             <input
               type="number"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
-              className="w-full p-3 border border-gray-300 rounded-lg mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-2 bg-black border border-white rounded-lg mt-1 text-white focus:outline-none focus:ring-0"
               required
             />
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-lg font-semibold rounde">Categoría:</label>
+          <div className="mb-3">
+            <label className="block text-white text-lg font-semibold">Categoría:</label>
             <input
               type="text"
               value={categoria}
               onChange={(e) => setCategoria(e.target.value)}
-              className="w-full p-3 border border-gray-300 rounded-lg mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-2 bg-black border border-white rounded-lg mt-1 text-white focus:outline-none focus:ring-0"
               required
             />
           </div>
-          <div className="mb-6">
-            <label className="block text-gray-700 text-lg font-semibold">Imagen (URL):</label>
+          <div className="mb-4">
+            <label className="block text-white text-lg font-semibold">Imagen (URL):</label>
             <input
               type="text"
               value={imagen}
               onChange={(e) => setImagen(e.target.value)}
-              className="w-full p-3 border border-gray-300 rounded-lg mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-2 bg-black border border-white rounded-lg mt-1 text-white focus:outline-none focus:ring-0"
             />
           </div>
           <button
             type="submit"
-            className="w-full bg-black text-white p-3 rounded-lg hover:bg-gray transition duration-300"
+            className="text-white text-xl bg-green-500 px-3 py-2 rounded hover:bg-green-600 mx-auto block fuente1"
           >
             {menuToEdit ? 'Guardar Cambios' : 'Agregar'}
           </button>
