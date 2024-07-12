@@ -1,5 +1,3 @@
-// App.js
-
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -17,14 +15,15 @@ import ConsumerMenuList6 from './components/ConsumerMenuList6';
 import ConsumerMenuList7 from './components/ConsumerMenuList7';
 import ConsumerMenuList8 from './components/ConsumerMenuList8';
 import OrderList from './components/OrderList';
+import PrintedOrderList from './components/PrintedOrderList';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import './index.css';
 import './App.css';
 
-function PrivateRoute({ element, ...rest }) {
+const PrivateRoute = ({ element }) => {
   const { isAuthenticated } = useAuth();
   return isAuthenticated ? element : <Navigate to="/login" />;
-}
+};
 
 const AppContent = () => {
   const location = useLocation();
@@ -38,6 +37,7 @@ const AppContent = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/add-menu" element={<PrivateRoute element={<AddMenu />} />} />
         <Route path="/orders" element={<PrivateRoute element={<OrderList />} />} />
+        <Route path="/printed-orders" element={<PrivateRoute element={<PrintedOrderList />} />} />
         <Route path="/menus" element={<PrivateRoute element={<MenuList />} />} />
         <Route path="/consumers" element={<ConsumerMenuList />} />
         <Route path="/consumers1" element={<ConsumerMenuList1 />} />
@@ -48,6 +48,7 @@ const AppContent = () => {
         <Route path="/consumers6" element={<ConsumerMenuList6 />} />
         <Route path="/consumers7" element={<ConsumerMenuList7 />} />
         <Route path="/consumers8" element={<ConsumerMenuList8 />} />
+        <Route path="*" element={<PrivateRoute element={<Navigate to="/orders" />} />} />
       </Routes>
     </>
   );

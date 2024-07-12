@@ -1,11 +1,9 @@
-// src/components/OrderList.jsx
-
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { useOrderApi } from '../api/orderApi';
 import { FaTrash, FaPrint } from 'react-icons/fa';
 import PrintOrder from './PrintOrder';
-import TableView from './TableView'; // Importar el nuevo componente
+import TableView from './TableView';
 
 const OrderList = () => {
   const [orders, setOrders] = useState([]);
@@ -44,13 +42,23 @@ const OrderList = () => {
     }
   };
 
-  const handlePrintOrder = (index) => {
-    const printContent = printRefs.current[index];
-    const originalContent = document.body.innerHTML;
-    document.body.innerHTML = printContent.outerHTML;
-    window.print();
-    document.body.innerHTML = originalContent;
-    window.location.reload(); // Recargar para volver a la vista original
+  const handlePrintOrder = async (index, orderId) => {
+    const printContent = printRefs.current[index].outerHTML;
+
+    try {
+      await axios.patch(`http://localhost:5000/api/orders/print/${orderId}`);
+      
+      const afterPrint = () => {
+        window.removeEventListener('afterprint', afterPrint);
+        window.location.reload(); // Recargar la página después de la impresión
+      };
+
+      window.addEventListener('afterprint', afterPrint, { once: true });
+      document.body.innerHTML = printContent;
+      window.print();
+    } catch (error) {
+      console.error('Error al marcar como impresa la orden:', error);
+    }
   };
 
   const formatSource = (source) => {
@@ -80,7 +88,7 @@ const OrderList = () => {
                     <h2 className="text-xl font-bold">N° de pedido: {order.orderNumber}</h2>
                     <div className="flex items-center space-x-4">
                       <button
-                        onClick={() => handlePrintOrder(index)}
+                        onClick={() => handlePrintOrder(index, order._id)}
                         className="bg-blue-500 hover:bg-blue-700 text-white rounded-full p-2"
                       >
                         <FaPrint />

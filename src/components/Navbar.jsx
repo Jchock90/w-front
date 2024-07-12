@@ -1,5 +1,3 @@
-// src/components/Navbar.jsx
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -56,6 +54,16 @@ const Navbar = () => {
         <ul className={`md:flex md:space-x-4 items-center text-xl text-center ${mobileMenuOpen ? 'block' : 'hidden'} ${isAuthenticated ? 'mt-4 md:mt-0' : ''}`}>
           {isAuthenticated ? (
             <>
+            <li>
+                <Link to="/orders" className="text-white text-center hover:text-gray-400">
+                  Pedidos
+                </Link>
+              </li>
+              <li>
+                <Link to="/printed-orders" className="text-white text-center hover:text-gray-400">
+                  Caja
+                </Link>
+              </li>
               <li>
                 <Link to="/add-menu" className="text-white hover:text-gray-400">
                   Añadir Menú
@@ -64,11 +72,6 @@ const Navbar = () => {
               <li>
                 <Link to="/menus" className="text-white text-center hover:text-gray-400">
                   Lista de Menús
-                </Link>
-              </li>
-              <li>
-                <Link to="/orders" className="text-white text-center hover:text-gray-400">
-                  Pedidos
                 </Link>
               </li>
               <li>
