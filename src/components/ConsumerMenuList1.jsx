@@ -155,7 +155,7 @@ const ConsumerMenuList1 = () => {
           value={searchTerm}
           onChange={handleSearchChange}
           placeholder="Buscar menú..."
-          className="px-4 py-2 w-[300px] rounded focus:outline-none focus:ring-0"
+          className="px-4 py-2 w-[300px] text-white bg-black border rounded focus:outline-none focus:ring-0"
         />
       </div>
 
@@ -206,13 +206,13 @@ const ConsumerMenuList1 = () => {
         itemClass="px-4 flex justify-center"
       >
         {filteredMenus.map((menu) => (
-          <div key={menu._id} className="bg-white p-2 w-[300px] h-[400px] rounded shadow-md">
-            <h2 className="text-xl text-center font-bold mb-2 fuente1">{menu.name}</h2>
+          <div key={menu._id} className="bg-black border p-2 w-[300px] h-[400px] rounded shadow-md">
+            <h2 className="text-xl text-white text-center font-bold mb-2 fuente1">{menu.name}</h2>
             <img src={menu.imagen} alt={menu.name} className="w-full h-32 object-cover rounded mb-2" />
-            <p className="mb-2 text-center fuente1 text-xl">${menu.price}</p>        
-            <div className="mb-2 h-[100px] overflow-y-auto">{menu.description}</div>
-            <p className="mb-2 text-white bg-black rounded text-center">{menu.categoria}</p>
-            <button onClick={() => addToCart(menu)} className=" bg-black text-white text-xl px-3 py-1 rounded fuente1 w-full">Agregar a tu mesa</button>
+            <p className="mb-2 text-white text-center fuente1 text-xl">${menu.price}</p>        
+            <div className="mb-2 h-[100px] text-white overflow-y-auto">{menu.description}</div>
+            <p className="mb-2 text-black bg-white rounded text-center">{menu.categoria}</p>
+            <button onClick={() => addToCart(menu)} className=" bg-black border text-white text-xl px-3 py-1 rounded fuente1 w-full">Agregar a tu mesa</button>
           </div>
         ))}
       </Carousel>

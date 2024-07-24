@@ -1,6 +1,9 @@
+// src/components/NavBar.jsx
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import logo from '../assets/logo.png'; // Asegúrate de que la ruta sea correcta
 
 const Navbar = () => {
   const { isAuthenticated, logout } = useAuth();
@@ -11,10 +14,10 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-black p-4 shadow-lg fuente1">
+    <nav className="bg-black p-4 shadow-lg fuente1 uppercase">
       <div className="container mx-auto flex justify-between items-center">
-        <Link to="/" className="text-white text-2xl md:text-3xl lg:text-4xl font-bold fuente1">
-          w4it3rdestroy3r
+        <Link to="/">
+          <img src={logo} alt="Logo" className="w-60" /> {/* Ajusta el tamaño según sea necesario */}
         </Link>
         <div className="md:hidden">
           <button onClick={toggleMobileMenu} className="text-white">
@@ -51,7 +54,7 @@ const Navbar = () => {
             )}
           </button>
         </div>
-        <ul className={`md:flex md:space-x-4 items-center text-xl text-center ${mobileMenuOpen ? 'block' : 'hidden'} ${isAuthenticated ? 'mt-4 md:mt-0' : ''}`}>
+        <ul className={`md:flex md:space-x-4 items-center text-2xl text-center ${mobileMenuOpen ? 'block' : 'hidden'} ${isAuthenticated ? 'mt-4 md:mt-0' : ''}`}>
           {isAuthenticated ? (
             <>
             <li>

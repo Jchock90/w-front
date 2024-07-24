@@ -17,8 +17,8 @@ code {
 }
 
 @font-face {
-  font-family: 'Rockers Garage';
-  src: url('../public/fonts/rockers_garage.ttf') format('truetype');
+  font-family: 'Acumin-BdPro';
+  src: url('../public/fonts/Acumin-BdPro.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
@@ -31,10 +31,10 @@ code {
 }
 
 .fuente1 {
-  font-family: 'Rockers Garage';
+  font-family: 'Acumin-BdPro';
 }
 
-.fuente2 {
+.fuente1 {
   font-family: 'OpenSerif-Book';
 }
 

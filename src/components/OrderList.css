@@ -1,0 +1,35 @@
+/* OrderList.css */
+
+.orders-container::-webkit-scrollbar {
+    height: 4px; /* Altura del scroll */
+  }
+  
+  .orders-container::-webkit-scrollbar-track {
+    background: transparent; /* Fondo del track */
+  }
+  
+  .orders-container::-webkit-scrollbar-thumb {
+    background-color: white; /* Color del scroll */
+    border-radius: 10px; /* Borde redondeado */
+    border: 1px solid transparent; /* Borde */
+  }
+  
+  .orders-container {
+    scrollbar-color: white transparent; /* Firefox scrollbar color */
+    scrollbar-width: thin; /* Firefox scrollbar width */
+  }
+  
+  .fixed-card-height::-webkit-scrollbar {
+    width: 4px; /* Ancho del scroll interno */
+  }
+  
+  .fixed-card-height::-webkit-scrollbar-track {
+    background: transparent; /* Fondo del track */
+  }
+  
+  .fixed-card-height::-webkit-scrollbar-thumb {
+    background-color: white; /* Color del scroll */
+    border-radius: 10px; /* Borde redondeado */
+    border: 1px solid transparent; /* Borde */
+  }
+  

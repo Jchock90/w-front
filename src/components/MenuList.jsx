@@ -137,12 +137,12 @@ const MenuList = () => {
         <Slider {...settings} className="mx-4">
           {filteredMenus.map((menu) => (
             <div key={menu._id} className="px-1">
-              <div className="bg-white p-4 rounded-lg shadow-lg w-[300px] h-[400px] mx-auto">
-                <h2 className="text-xl text-center font-bold mb-2 fuente1">{menu.name}</h2>
+              <div className="bg-black border p-4 rounded-lg shadow-lg w-[300px] h-[400px] mx-auto">
+                <h2 className="text-xl text-white text-center font-bold mb-2 fuente1">{menu.name}</h2>
                 {menu.imagen && <img src={menu.imagen} alt={menu.name} className="w-full h-24 object-cover rounded-lg mb-2" />}
-                <div className="text-black mb-2 text-sm max-h-[100px] overflow-y-auto">{menu.description}</div>
-                <p className="text-center fuente1 text-lg font-semibold mb-2">${menu.price}</p>
-                <p className="text-center text-white bg-black rounded py-1 px-3 mb-2 fuente2">{menu.categoria}</p>
+                <div className="text-black mb-2 text-white text-sm max-h-[100px] overflow-y-auto">{menu.description}</div>
+                <p className="text-center fuente1 text-white text-lg font-semibold mb-2">${menu.price}</p>
+                <p className="text-center bg-white text-black bg-black rounded py-1 px-3 mb-2 fuente1">{menu.categoria}</p>
                 <div className="flex justify-between">
                   <button
                     className="text-white text-xl bg-green-500 px-3 py-2 rounded hover:bg-green-600 block fuente1"

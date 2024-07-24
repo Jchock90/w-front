@@ -25,7 +25,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black fuente2">
+    <div className="min-h-screen flex items-center justify-center bg-black fuente1">
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-gray-900 text-center">Iniciar Sesión</h2>
         {error && <p className="text-red-500 mb-4 text-center">{error}</p>}

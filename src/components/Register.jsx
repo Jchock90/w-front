@@ -23,7 +23,7 @@ function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black fuente2">
+    <div className="min-h-screen flex items-center justify-center bg-black fuente1">
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
         <h2 className="text-2xl text-center font-bold mb-6 text-gray-900">Registro</h2>
         <form onSubmit={handleSubmit}>

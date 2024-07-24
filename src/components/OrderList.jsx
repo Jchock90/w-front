@@ -1,9 +1,11 @@
+// src/components/OrderList.jsx
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { useOrderApi } from '../api/orderApi';
 import { FaTrash, FaPrint } from 'react-icons/fa';
 import PrintOrder from './PrintOrder';
 import TableView from './TableView';
+import './OrderList.css';  // Importa el archivo CSS personalizado
 
 const OrderList = () => {
   const [orders, setOrders] = useState([]);
@@ -74,49 +76,57 @@ const OrderList = () => {
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-4 text-white">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div className="max-w-7xl mx-auto px-4 py-4 text-white">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div className="flex flex-col items-center">
           <h1 className="text-4xl font-bold text-center mt-4 mb-4 fuente1">Pedidos</h1>
           {orders.length === 0 ? (
             <p className="text-center">Aún no hay pedidos.</p>
           ) : (
-            <ul className="divide-y divide-gray-300">
-              {orders.map((order, index) => (
-                <li key={order._id} className="py-4 flex flex-col">
-                  <div className="flex justify-between items-center mb-2">
-                    <h2 className="text-xl font-bold">N° de pedido: {order.orderNumber}</h2>
-                    <div className="flex items-center space-x-4">
-                      <button
-                        onClick={() => handlePrintOrder(index, order._id)}
-                        className="bg-blue-500 hover:bg-blue-700 text-white rounded-full p-2"
-                      >
-                        <FaPrint />
-                      </button>
-                      <button
-                        onClick={() => handleDeleteOrder(order._id)}
-                        className="bg-red-500 text-white rounded-full p-2 hover:bg-red-700"
-                      >
-                        <FaTrash />
-                      </button>
+            <div className="orders-container overflow-x-auto w-full">
+              <ul className="flex space-x-4">
+                {orders.map((order, index) => (
+                  <li key={order._id} className="py-4 flex-shrink-0 w-[220px] bg-black border p-4 rounded-lg shadow-lg h-80 flex flex-col justify-between">
+                    <div className="flex flex-col h-full">
+                      <div>
+                        <div className="flex justify-between items-center mb-2">
+                          <h2 className="text-xl font-bold">N° de pedido: {order.orderNumber}</h2>
+                          <div className="flex items-center space-x-4">
+                            <button
+                              onClick={() => handlePrintOrder(index, order._id)}
+                              className="bg-blue-500 hover:bg-blue-700 text-white rounded-full p-2"
+                            >
+                              <FaPrint />
+                            </button>
+                            <button
+                              onClick={() => handleDeleteOrder(order._id)}
+                              className="bg-red-500 text-white rounded-full p-2 hover:bg-red-700"
+                            >
+                              <FaTrash />
+                            </button>
+                          </div>
+                        </div>
+                        <p className="text-gray-500 mb-2">Origen: {formatSource(order.source)}</p>
+                      </div>
+                      <ul className="divide-y divide-gray-200 mb-2 overflow-y-auto max-h-32">
+                        {order.items.map((item, index) => (
+                          <li key={index} className="py-2 flex justify-between">
+                            <p>{item.name} (x{item.quantity})</p>
+                            <p>${(item.price * item.quantity).toFixed(2)}</p>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                  </div>
-                  <p className="text-gray-500 mb-2">Origen: {formatSource(order.source)}</p>
-                  <ul className="divide-y divide-gray-200 mb-2">
-                    {order.items.map((item, index) => (
-                      <li key={index} className="py-2 flex justify-between">
-                        <p>{item.name} (x{item.quantity})</p>
-                        <p>${(item.price * item.quantity).toFixed(2)}</p>
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="text-xl font-bold text-right mt-4">
-                    Total: <span className="text-green-500">${order.total.toFixed(2)}</span>
-                  </p>
-                  <PrintOrder ref={el => (printRefs.current[index] = el)} order={order} />
-                </li>
-              ))}
-            </ul>
+                    <div className="mt-auto">
+                      <p className="text-xl font-bold text-right">
+                        Total: <span className="text-green-500">${order.total.toFixed(2)}</span>
+                      </p>
+                    </div>
+                    <PrintOrder ref={el => (printRefs.current[index] = el)} order={order} />
+                  </li>
+                ))}
+              </ul>
+            </div>
           )}
         </div>
         <div className="flex flex-col items-center">
