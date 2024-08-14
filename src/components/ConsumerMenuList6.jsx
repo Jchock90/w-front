@@ -1,4 +1,4 @@
-// src/components/ConsumersMenuList.jsx
+// src/components/ConsumerMenuList6.jsx
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -7,15 +7,15 @@ import 'react-multi-carousel/lib/styles.css';
 import { Popover } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/24/solid';
 import { FaTrash } from 'react-icons/fa';
-import { useOrderApi } from '../api/orderApi'; // Importa useOrderApi
+import { useOrderApi } from '../api/orderApi';
 
-const ConsumersMenuList = () => {
+const ConsumersMenuList6 = () => {
   const [menus, setMenus] = useState([]);
   const [cart, setCart] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState(new Set());
   const [searchTerm, setSearchTerm] = useState('');
-  const { addOrder } = useOrderApi(); // Añade addOrder desde useOrderApi
+  const { addOrder } = useOrderApi();
 
   useEffect(() => {
     const fetchMenus = async () => {
@@ -31,7 +31,7 @@ const ConsumersMenuList = () => {
 
     fetchMenus();
 
-    const storedCart = localStorage.getItem('cart');
+    const storedCart = localStorage.getItem('cart6'); // Modificar el almacenamiento del carrito
     if (storedCart) {
       setCart(JSON.parse(storedCart));
     }
@@ -48,7 +48,7 @@ const ConsumersMenuList = () => {
       updatedCart = [...cart, { ...menu, cartItemId: new Date().getTime(), quantity: 1 }];
     }
     setCart(updatedCart);
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
+    localStorage.setItem('cart6', JSON.stringify(updatedCart));  // Modificar el almacenamiento del carrito
   };
 
   const removeFromCart = (cartItemId) => {
@@ -62,7 +62,7 @@ const ConsumersMenuList = () => {
       updatedCart = cart.filter((item) => item.cartItemId !== cartItemId);
     }
     setCart(updatedCart);
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
+    localStorage.setItem('cart6', JSON.stringify(updatedCart));  // Modificar el almacenamiento del carrito
   };
 
   const getTotalPrice = () => {
@@ -98,13 +98,14 @@ const ConsumersMenuList = () => {
   const handlePlaceOrder = async () => {
     const orderData = {
       items: cart.map(item => ({ name: item.name, price: item.price, quantity: item.quantity })),
-      total: getTotalPrice()
+      total: getTotalPrice(),
+      source: 'consumers6'  // Añadir el origen del pedido
     };
 
     try {
       await addOrder(orderData);
       setCart([]);
-      localStorage.removeItem('cart');
+      localStorage.removeItem('cart6');  // Modificar el almacenamiento del carrito
       console.log('Pedido enviado exitosamente');
     } catch (error) {
       console.error('Error al enviar el pedido:', error);
@@ -130,12 +131,11 @@ const ConsumersMenuList = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-4 border">
+    <div className="max-w-6xl mx-auto px-4 py-4">
       <h1 className="text-4xl w-[300px] bg-black font-bold text-center text-white mb-2 fuente1 mx-auto">
         Menú
       </h1>
 
-      {/* Barra de búsqueda */}
       <div className="mb-4 flex justify-center">
         <input
           type="text"
@@ -146,7 +146,6 @@ const ConsumersMenuList = () => {
         />
       </div>
 
-      {/* Categorías */}
       <div className="mb-4 flex justify-center">
         <Popover className="relative">
           <Popover.Button className="flex flex-col focus:outline-none items-center text-xl text-white bg-black px-4 py-2 rounded  fuente1">
@@ -209,7 +208,7 @@ const ConsumersMenuList = () => {
                     <p className="text-gray-600">${(item.price * item.quantity).toFixed(2)}</p>
                   </div>
                   <button onClick={() => removeFromCart(item.cartItemId)} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded flex items-center justify-center">
-                    <FaTrash /> {/* Usa el icono aquí */}
+                    <FaTrash />
                   </button>
                 </li>
               ))}
@@ -232,4 +231,4 @@ const ConsumersMenuList = () => {
   );
 };
 
-export default ConsumersMenuList;
+export default ConsumersMenuList6;
