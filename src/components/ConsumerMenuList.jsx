@@ -130,7 +130,7 @@ const ConsumersMenuList = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-4">
+    <div className="max-w-6xl mx-auto px-4 py-4 border">
       <h1 className="text-4xl w-[300px] bg-black font-bold text-center text-white mb-2 fuente1 mx-auto">
         Menú
       </h1>

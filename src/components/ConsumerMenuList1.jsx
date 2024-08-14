@@ -145,7 +145,7 @@ const ConsumerMenuList1 = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-4">
-      <h1 className="text-4xl w-[300px] bg-black font-bold text-center text-white mb-2 fuente1 mx-auto">
+      <h1 className="text-4xl w-[300px] bg-black font-bold text-center text-white mb-4 fuente1 mx-auto">
         Menú
       </h1>
 
@@ -161,7 +161,7 @@ const ConsumerMenuList1 = () => {
 
       <div className="mb-4 flex justify-center items-center relative w-full">
         <Popover className="relative">
-          <Popover.Button className="flex flex-col focus:outline-none items-center text-xl text-white bg-black px-4 py-2 rounded w-[150px]">
+          <Popover.Button className="flex flex-col focus:outline-none items-center text-xl text-white bg-black px-4 py-1 rounded w-[150px]">
             Categorías
             <ChevronDownIcon className="h-5 w-5 mt-1" />
           </Popover.Button>
