@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Slider from 'react-slick';
+import './OrderList.css';  // Importa el archivo CSS aquí
 
 const PrintedOrderList = () => {
   const [orders, setOrders] = useState([]);
@@ -37,48 +37,22 @@ const PrintedOrderList = () => {
     return <p>Loading...</p>;
   }
 
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: true
-        }
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
-  };
-
   return (
-    <div className="max-w-6xl mx-auto px-4 py-4 text-white relative">
+    <div className="max-w-6xl mx-auto px-4 py-2 text-white relative">
       <div className="flex flex-col items-center">
-        <h1 className="text-4xl font-bold text-center mt-4 mb-20 fuente1">Caja</h1>
+        <h1 className="text-4xl font-bold text-center mb-10 fuente1">Caja</h1>
         {closeMessage && (
           <div className="bg-green-200 text-green-800 p-4 rounded mb-4">
             {closeMessage}
           </div>
         )}
         {orders.length === 0 ? (
-          <p className="text-center mb-20">Aún no hay pedidos.</p>
+          <p className="text-center text-xl">Aún no hay pedidos.</p>
         ) : (
-          <Slider {...settings} className="w-full mb-20">
+          <div className="flex overflow-x-auto space-x-4 w-full mb-20 orders-container">
             {orders.map((order) => (
-              <div key={order._id} className="p-4">
-                <div className="border p-4 h-[280px] flex flex-col justify-between fixed-size-card max-w-xs">
+              <div key={order._id} className="p-4 flex-shrink-0">
+                <div className="border p-4 h-[280px]  w-[220px] flex flex-col justify-between fixed-size-card max-w-xs">
                   <div>
                     <h2 className="text-xl font-bold">N° de pedido: {order.orderNumber}</h2>
                     <p className="text-gray-500 mb-2">Origen: {order.source}</p>
@@ -99,7 +73,7 @@ const PrintedOrderList = () => {
                 </div>
               </div>
             ))}
-          </Slider>
+          </div>
         )}
         <button
           onClick={closeCashRegister}

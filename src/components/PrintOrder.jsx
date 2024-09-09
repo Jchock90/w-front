@@ -18,4 +18,3 @@ const PrintOrder = forwardRef(({ order }, ref) => (
 ));
 
 export default PrintOrder;
-

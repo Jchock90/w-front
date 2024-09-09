@@ -14,7 +14,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-black p-4 shadow-lg fuente1 uppercase">
+    <nav className="bg-black p-4 shadow-lg fuente1">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/">
           <img src={logo} alt="Logo" className="w-60" /> {/* Ajusta el tamaño según sea necesario */}

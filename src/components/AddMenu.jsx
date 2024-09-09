@@ -10,7 +10,8 @@ const AddMenu = ({ menuToEdit, onMenuUpdated }) => {
   const [price, setPrice] = useState('');
   const [categoria, setCategoria] = useState('');
   const [imagen, setImagen] = useState('');
-  const [error, setError] = useState('');
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
 
   useEffect(() => {
     if (menuToEdit) {
@@ -31,19 +32,27 @@ const AddMenu = ({ menuToEdit, onMenuUpdated }) => {
       } else {
         await addMenu({ name, description, price, categoria, imagen });
       }
-      console.log('Menú guardado exitosamente');
+      setShowSuccessModal(true);
+      setTimeout(() => {
+        setShowSuccessModal(false);
+      }, 2000); // Oculta el modal de éxito después de 2 segundos
     } catch (err) {
-      setError('Error al guardar el menú');
+      console.error('Error al guardar el menú:', err);
+      setShowErrorModal(true);
+      setTimeout(() => {
+        setShowErrorModal(false);
+      }, 2000); // Oculta el modal de error después de 2 segundos
     }
   };
 
   return (
-    <div className="min-h-screen flex items-top justify-center">
-      <div className="p-6 rounded-lg shadow-md w-full max-w-md">
-        <h2 className="text-3xl font-bold mb-4 text-white text-center fuente1">{menuToEdit ? 'Editar Menú' : 'Agregar Menú'}</h2>
-        {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
+    <div className="flex items-start justify-center">
+      <div className="p-4 pt-2 rounded-lg shadow-md w-full max-w-md bg-black">
+        <h2 className="text-4xl font-bold mb-2 text-white text-center fuente1">
+          {menuToEdit ? 'Editar Menú' : 'Agregar Menú'}
+        </h2>
         <form onSubmit={handleSubmit}>
-          <div className="mb-3">
+          <div className="mb-2">
             <label className="block text-white text-lg font-semibold">Nombre:</label>
             <input
               type="text"
@@ -53,7 +62,7 @@ const AddMenu = ({ menuToEdit, onMenuUpdated }) => {
               required
             />
           </div>
-          <div className="mb-3">
+          <div className="mb-2">
             <label className="block text-white text-lg font-semibold">Descripción:</label>
             <textarea
               value={description}
@@ -62,7 +71,7 @@ const AddMenu = ({ menuToEdit, onMenuUpdated }) => {
               required
             />
           </div>
-          <div className="mb-3">
+          <div className="mb-2">
             <label className="block text-white text-lg font-semibold">Precio:</label>
             <input
               type="number"
@@ -72,7 +81,7 @@ const AddMenu = ({ menuToEdit, onMenuUpdated }) => {
               required
             />
           </div>
-          <div className="mb-3">
+          <div className="mb-2">
             <label className="block text-white text-lg font-semibold">Categoría:</label>
             <input
               type="text"
@@ -99,6 +108,26 @@ const AddMenu = ({ menuToEdit, onMenuUpdated }) => {
           </button>
         </form>
       </div>
+
+      {/* Modal de éxito */}
+      {showSuccessModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white p-8 rounded shadow-md text-center">
+            <h3 className="text-2xl font-bold text-green-500 mb-4">¡Menú guardado exitosamente!</h3>
+            <p className="text-gray-700">El menú ha sido guardado correctamente.</p>
+          </div>
+        </div>
+      )}
+
+      {/* Modal de error */}
+      {showErrorModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white p-8 rounded shadow-md text-center">
+            <h3 className="text-2xl font-bold text-red-500 mb-4">¡Error al guardar el menú!</h3>
+            <p className="text-gray-700">Por favor, intenta nuevamente.</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
